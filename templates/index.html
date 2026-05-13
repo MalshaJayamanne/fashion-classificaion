@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FashionVision | Advanced AI Intelligence</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="ambient-bg"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="nav-brand">
+        <i class="fas fa-brain"></i>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="nav-btn active" title="Dashboard"
+          ><i class="fas fa-th-large"></i
+        ></a>
+        <a href="#" class="nav-btn" title="Model Metrics"
+          ><i class="fas fa-chart-network"></i
+        ></a>
+      </div>
+    </aside>
+
+    <main class="dashboard-wrapper">
+      <header class="top-header">
+        <div class="hero-title">
+          <h1>
+            Deep Learning <br /><span class="gradient-text">Fashion Item</span>
+            <span class="neon-text">Recognition</span>
+          </h1>
+          <p class="hero-subtitle">
+            Upload fashion imagery for sub-second convolutional neural network
+            inference.
+          </p>
+        </div>
+        <div class="header-controls">
+          <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div class="system-status">
+            <div class="status-dot"></div>
+            ACTIVE CNN...
+          </div>
+        </div>
+      </header>
+
+      <div class="grid-layout">
+        <!-- Upload Panel -->
+        <div class="glass-panel upload-panel">
+          <div id="drop-area" class="upload-zone">
+            <div id="upload-icon-wrapper" class="upload-icon-container">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <h3
+              id="upload-text-main"
+              style="
+                font-family: var(--font-heading);
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+                z-index: 20;
+              "
+            >
+              Initialize Tensor
+            </h3>
+            <p id="upload-text-sub" style="color: var(--text-dim); z-index: 20">
+              Drag & drop image or click to browse
+            </p>
+
+            <input type="file" id="fileElem" accept="image/*" class="hidden" />
+            <img id="image-preview" class="hidden" src="" alt="Input Tensor" />
+            <div id="scanline" class="scanline hidden"></div>
+          </div>
+
+          <button id="predict-btn" class="btn-run" disabled>
+            <span id="btn-text">WAITING FOR INPUT...</span>
+            <div id="loader" class="ai-loader hidden"></div>
+          </button>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="glass-panel results-panel" id="results-panel">
+          <div class="results-header">
+            <span class="results-title">Analysis Output</span>
+            <button
+              id="reset-btn"
+              style="
+                background: none;
+                border: none;
+                color: var(--text-muted);
+                cursor: pointer;
+                font-size: 1.2rem;
+              "
+              title="Reset Workflow"
+            >
+              <i class="fas fa-redo"></i>
+            </button>
+          </div>
+
+          <!-- Greyscale Preview Card -->
+          <div class="greyscale-card hidden" id="greyscale-card">
+            <div class="greyscale-preview-wrapper">
+              <img id="greyscale-preview" src="" alt="Processed 28x28 Tensor" />
+            </div>
+            <div class="greyscale-info">
+              <span class="greyscale-label"
+                ><i class="fas fa-eye"></i> MODEL INPUT</span
+              >
+              <span class="greyscale-dim"
+                >28 × 28 · Greyscale · Normalized</span
+              >
+            </div>
+          </div>
+
+          <div class="prediction-display blur-overlay" id="pred-display">
+            <div class="chart-container">
+              <svg width="180" height="180" viewBox="0 0 160 160">
+                <defs>
+                  <linearGradient
+                    id="gradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stop-color="#8b5cf6" />
+                    <stop offset="100%" stop-color="#3b82f6" />
+                  </linearGradient>
+                </defs>
+                <circle class="chart-bg" cx="80" cy="80" r="70"></circle>
+                <circle
+                  id="conf-circle"
+                  class="chart-fill"
+                  cx="80"
+                  cy="80"
+                  r="70"
+                ></circle>
+              </svg>
+              <div class="chart-text">
+                <h2 id="result-conf">
+                  0<span style="font-size: 1.5rem">%</span>
+                </h2>
+                <span>CONFIDENCE</span>
+              </div>
+            </div>
+
+            <div class="details-list">
+              <h2 id="result-class">AWAITING</h2>
+
+              <div id="top-preds-container">
+                <!-- Injected by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
