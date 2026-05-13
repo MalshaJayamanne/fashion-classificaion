@@ -77,7 +77,7 @@ The system consists of three main components:
 1. **Clone the repository** (if applicable):
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/MalshaJayamanne/fashion-classificaion
    cd my-model
    ```
 
